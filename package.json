@@ -1,6 +1,27 @@
 {
   "dependencies": {
-    "discord.js": "^12.5.3",
     "jimp": "^0.16.1"
-  }
+  },
+  "name": "image-warzone",
+  "description": "Generate image for warzone bot",
+  "version": "1.0.0",
+  "main": "app.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tiagfernandes/image-warzone.git"
+  },
+  "keywords": [
+    "warzone",
+    "image"
+  ],
+  "author": "Tiago Fernandes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tiagfernandes/image-warzone/issues"
+  },
+  "homepage": "https://github.com/tiagfernandes/image-warzone#readme"
 }
