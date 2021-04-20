@@ -1,11 +1,9 @@
 const Jimp = require("jimp");
 
-const imageSolo = "./images/Solo.png";
-const imageDuo = "./images/Duo.png";
-const imageTrio = "./images/Trio.png";
-const imageQuator = "./images/Quatuor.png";
-
-let loadedImage;
+const imageSolo = __dirname + "/images/Solo.png";
+const imageDuo = __dirname + "/images/Duo.png";
+const imageTrio = __dirname + "/images/Trio.png";
+const imageQuator = __dirname + "/images/Quatuor.png";
 
 const X_NUMBER_TOP = 480;
 const Y_NUMBER_TOP = 292;
@@ -45,6 +43,7 @@ function unixTime(unixtime) {
 }
 
 const generateImageMatch = (data) => {
+    let loadedImage;
     let image = null;
     switch (data.players.length) {
         case 1:
@@ -62,31 +61,31 @@ const generateImageMatch = (data) => {
     }
 
     return Jimp.read(image)
-        .then(async function (image) {
-            loadedImage = image;
+        .then(async function (img) {
+            loadedImage = img;
 
             const HELVETICA_NEUE_95_BLACK = await Jimp.loadFont(
-                "./fonts/HELVETICA_NEUE_95_BLACK.fnt"
+                __dirname + "/fonts/HELVETICA_NEUE_95_BLACK.fnt"
             );
 
             const HELVETICA_NEUE_95_BRONZE = await Jimp.loadFont(
-                "./fonts/HELVETICA_NEUE_95_BRONZE.fnt"
+                __dirname + "/fonts/HELVETICA_NEUE_95_BRONZE.fnt"
             );
 
             const HELVETICA_NEUE_95_SILVER = await Jimp.loadFont(
-                "./fonts/HELVETICA_NEUE_95_SILVER.fnt"
+                __dirname + "/fonts/HELVETICA_NEUE_95_SILVER.fnt"
             );
 
             const HELVETICA_NEUE_95_GOLD = await Jimp.loadFont(
-                "./fonts/HELVETICA_NEUE_95_GOLD.fnt"
+                __dirname + "/fonts/HELVETICA_NEUE_95_GOLD.fnt"
             );
 
             const HELVETICA_NEUE_53_EXTENDED = await Jimp.loadFont(
-                "./fonts/HELVETICA_NEUE_53_EXTENDED.fnt"
+                __dirname + "/fonts/HELVETICA_NEUE_53_EXTENDED.fnt"
             );
 
             const HELVETICA_NEUE_LT_STD_83_HEAVY_EXTENDED = await Jimp.loadFont(
-                "./fonts/HELVETICA_NEUE_LT_STD_83_HEAVY_EXTENDED.fnt"
+                __dirname + "/fonts/HELVETICA_NEUE_LT_STD_83_HEAVY_EXTENDED.fnt"
             );
 
             const frontTop = (top) => {
@@ -123,7 +122,6 @@ const generateImageMatch = (data) => {
                     105,
                     unixTime(data.matchEnded)
                 );
-                console.log(unixTime(data.matchEnded));
 
             data.players.forEach((player, index) => {
                 let y = Y_FIRST_LINE_SOLO;
@@ -172,7 +170,7 @@ const generateImageMatch = (data) => {
                         X_NAME,
                         y,
                         {
-                            text: player.playerName,
+                            text: player.playerName.toUpperCase(),
                             alignmentX: Jimp.HORIZONTAL_ALIGN_LEFT,
                             alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                         },
@@ -272,7 +270,6 @@ const generateImageMatch = (data) => {
                     );
             });
             return;
-            // loadedImage.write(`./images/Quatuor${Math.random()}.png`);
         })
         .then(async () => {
             return await loadedImage.getBufferAsync(Jimp.MIME_PNG);
