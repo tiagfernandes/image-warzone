@@ -6,11 +6,11 @@ const imageTrio = __dirname + "/images/Trio.png";
 const imageQuator = __dirname + "/images/Quatuor.png";
 
 const X_NUMBER_TOP = 480;
-const Y_NUMBER_TOP = 292;
+const Y_NUMBER_TOP = 292 - 2;
 const MAX_WIDTH_NUMBER_TOP = 110;
 const MAX_HEIGHT_NUMBER_TOP = 51;
 
-const Y_FIRST_LINE_SOLO = 568;
+const Y_FIRST_LINE_SOLO = 568 + 2;
 
 const Y_FIRST_LINE_DUO = 545;
 const Y_SECOND_LINE_DUO = 643;
@@ -32,6 +32,16 @@ const X_HS = 1114;
 const X_DAMMAGE_DEALT = 1268;
 const X_DAMMAGE_TAKEN = 1424;
 const X_REVIVER = 1574;
+
+const X_DATE = 1537;
+const Y_DATE = 130;
+const MAX_WIDTH_DATE = 285;
+const MAX_HEIGHT_DATE = 42;
+
+const X_MODE = 856;
+const Y_MODE = 144;
+const MAX_WIDTH_MODE = 202;
+const MAX_HEIGHT_MODE = 48;
 
 const MAX_WIDTH_NAME = 423;
 const MAX_WIDTH_STATS = 131;
@@ -88,6 +98,14 @@ const generateImageMatch = (data) => {
                 __dirname + "/fonts/HELVETICA_NEUE_LT_STD_83_HEAVY_EXTENDED.fnt"
             );
 
+            const HELVETICA_NEUE_53_EXTENDED_DATE = await Jimp.loadFont(
+                __dirname + "/fonts/HELVETICA_NEUE_53_EXTENDED_DATE.fnt"
+            );
+
+            const HELVETICA_NEUE_53_EXTENDED_MODE = await Jimp.loadFont(
+                __dirname + "/fonts/HELVETICA_NEUE_53_EXTENDED_MODE.fnt"
+            );
+
             const frontTop = (top) => {
                 switch (top) {
                     case 1:
@@ -117,10 +135,29 @@ const generateImageMatch = (data) => {
                 )
                 //MATCH ENDED
                 .print(
-                    HELVETICA_NEUE_53_EXTENDED,
-                    1400,
-                    105,
-                    unixTime(data.matchEnded)
+                    HELVETICA_NEUE_53_EXTENDED_DATE,
+                    X_DATE,
+                    Y_DATE,
+                    {
+                        text: unixTime(data.matchEnded),
+                        alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
+                        alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
+                    },
+                    MAX_WIDTH_DATE,
+                    MAX_HEIGHT_DATE
+                )
+                //MODE GAME
+                .print(
+                    HELVETICA_NEUE_53_EXTENDED_MODE,
+                    X_MODE,
+                    Y_MODE,
+                    {
+                        text: data.mode,
+                        alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
+                        alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
+                    },
+                    MAX_WIDTH_MODE,
+                    MAX_HEIGHT_MODE
                 );
 
             data.players.forEach((player, index) => {
@@ -163,7 +200,6 @@ const generateImageMatch = (data) => {
                 }
 
                 loadedImage
-                    //FIRST
                     //Name
                     .print(
                         HELVETICA_NEUE_53_EXTENDED,
