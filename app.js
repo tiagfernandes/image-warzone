@@ -50,8 +50,8 @@ const MAX_HEIGHT_LINE = 71;
 
 function unixTime(unixtime) {
     return moment(unixtime * 1000).format("D/MM/YY hh:mm:ss")
-    var d = new Date(unixtime * 1000);
-    return d.toLocaleString("en-GB");
+    // var d = new Date(unixtime * 1000);
+    // return d.toLocaleString("en-GB");
 }
 
 const generateImageMatch = (data) => {
@@ -128,7 +128,7 @@ const generateImageMatch = (data) => {
                     X_NUMBER_TOP,
                     Y_NUMBER_TOP,
                     {
-                        text: data.top.toString(),
+                        text: data.top ? data.top.toString() : 0,
                         alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
