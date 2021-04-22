@@ -34,7 +34,7 @@ const X_DAMMAGE_DEALT = 1268;
 const X_DAMMAGE_TAKEN = 1424;
 const X_REVIVER = 1574;
 
-const X_DATE = 1537;
+const X_DATE = 1530;
 const Y_DATE = 130;
 const MAX_WIDTH_DATE = 285;
 const MAX_HEIGHT_DATE = 42;
