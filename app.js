@@ -7,23 +7,23 @@ const imageTrio = __dirname + "/images/Trio.png";
 const imageQuator = __dirname + "/images/Quatuor.png";
 
 const X_NUMBER_TOP = 480;
-const Y_NUMBER_TOP = 292 - 2;
+const Y_NUMBER_TOP = 290;
 const MAX_WIDTH_NUMBER_TOP = 110;
 const MAX_HEIGHT_NUMBER_TOP = 51;
 
-const Y_FIRST_LINE_SOLO = 568 + 2;
+const Y_FIRST_LINE_SOLO = 570;
 
-const Y_FIRST_LINE_DUO = 545 + 5;
-const Y_SECOND_LINE_DUO = 643 + 5;
+const Y_FIRST_LINE_DUO = 550;
+const Y_SECOND_LINE_DUO = 648;
 
-const Y_FIRST_LINE_TRIO = 515 + 5;
-const Y_SECOND_LINE_TRIO = 613 + 5;
-const Y_THIRD_LINE_TRIO = 710 + 5;
+const Y_FIRST_LINE_TRIO = 520;
+const Y_SECOND_LINE_TRIO = 618;
+const Y_THIRD_LINE_TRIO = 715;
 
-const Y_FIRST_LINE_QUATUOR = 498 + 2;
-const Y_SECOND_LINE_QUATUOR = 596 + 2;
-const Y_THIRD_LINE_QUATUOR = 693 + 2;
-const Y_FOURTH_LINE_QUATUOR = 791 + 2;
+const Y_FIRST_LINE_QUATUOR = 500;
+const Y_SECOND_LINE_QUATUOR = 598;
+const Y_THIRD_LINE_QUATUOR = 695;
+const Y_FOURTH_LINE_QUATUOR = 793;
 
 const X_NAME = 222;
 const X_KDR = 654;
@@ -49,9 +49,7 @@ const MAX_WIDTH_STATS = 131;
 const MAX_HEIGHT_LINE = 71;
 
 function unixTime(unixtime) {
-    return moment(unixtime * 1000).format("D/MM/YY hh:mm:ss")
-    // var d = new Date(unixtime * 1000);
-    // return d.toLocaleString("en-GB");
+    return moment(unixtime * 1000).format("D/MM/YY HH:mm:ss")
 }
 
 const generateImageMatch = (data) => {
