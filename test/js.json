@@ -15,7 +15,7 @@
         },
         {
             "playerName": "BrickLayer",
-            "kdr": 10.00,
+            "kdr": 11.00,
             "kills": 10,
             "deaths": 5,
             "headshots": 2,
@@ -25,7 +25,7 @@
         },
         {
             "playerName": "BrickLayer",
-            "kdr": 10.00,
+            "kdr": 0.00,
             "kills": 10,
             "deaths": 5,
             "headshots": 2,
@@ -35,7 +35,7 @@
         },
         {
             "playerName": "BrickLayer",
-            "kdr": 10.00,
+            "kdr": 1.00,
             "kills": 10,
             "deaths": 5,
             "headshots": 2,

@@ -55,7 +55,9 @@ function unixTime(unixtime) {
 const generateImageMatch = (data) => {
     let loadedImage;
     let image = null;
-    switch (data.players.length) {
+
+    let players = data.players.sort((a,b) => (a.kdr > b.kdr) ? -1 : ((b.kdr > a.kdr) ? 1 : 0))
+    switch (players.length) {
         case 1:
             image = imageSolo;
             break;
@@ -160,10 +162,10 @@ const generateImageMatch = (data) => {
                     MAX_HEIGHT_MODE
                 );
 
-            data.players.forEach((player, index) => {
+            players.forEach((player, index) => {
                 let y = Y_FIRST_LINE_SOLO;
 
-                switch (data.players.length) {
+                switch (players.length) {
                     case 1:
                         y = Y_FIRST_LINE_SOLO;
                         break;
