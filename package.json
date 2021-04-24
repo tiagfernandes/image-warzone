@@ -5,7 +5,7 @@
   },
   "name": "image-warzone",
   "description": "Generate image for warzone bot",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "main": "app.js",
   "scripts": {
     "test": "node test/test.js"

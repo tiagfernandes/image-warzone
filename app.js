@@ -6,10 +6,11 @@ const imageDuo = __dirname + "/images/Duo.png";
 const imageTrio = __dirname + "/images/Trio.png";
 const imageQuator = __dirname + "/images/Quatuor.png";
 
-const X_NUMBER_TOP = 480;
-const Y_NUMBER_TOP = 290;
-const MAX_WIDTH_NUMBER_TOP = 110;
-const MAX_HEIGHT_NUMBER_TOP = 51;
+const X_NUMBER_TOP = 420;
+const Y_NUMBER_TOP = 272;
+const MAX_WIDTH_NUMBER_TOP = 219;
+const MAX_HEIGHT_NUMBER_TOP = 92;
+
 
 const Y_FIRST_LINE_SOLO = 570;
 
