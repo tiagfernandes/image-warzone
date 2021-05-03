@@ -1,2 +1,6 @@
 /node_modules
-/test/test.png
+/test/stats.png
+/test/track.png
+
+.DS_Store
+fonts/.DS_Store

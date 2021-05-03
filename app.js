@@ -5,13 +5,12 @@ const imageSolo = __dirname + "/images/Solo.png";
 const imageDuo = __dirname + "/images/Duo.png";
 const imageTrio = __dirname + "/images/Trio.png";
 const imageQuator = __dirname + "/images/Quatuor.png";
-//const imageStats = __dirname + "/images/Stats.png";
+const imageStats = __dirname + "/images/Stats.png";
 
 const X_NUMBER_TOP = 420;
 const Y_NUMBER_TOP = 272;
 const MAX_WIDTH_NUMBER_TOP = 219;
 const MAX_HEIGHT_NUMBER_TOP = 92;
-
 
 const Y_FIRST_LINE_SOLO = 570;
 
@@ -52,10 +51,10 @@ const MAX_HEIGHT_LINE = 71;
 
 //<STATISTIQUES></STATISTIQUES>
 
-// const X_PSEUDO = 856;
-// const Y_PSEUDO = 144;
-// const MAX_WIDTH_PSEUDO = 202;
-// const MAX_HEIGHT_PSEUDO = 48;
+const X_PSEUDO = 856;
+const Y_PSEUDO = 144;
+const MAX_WIDTH_PSEUDO = 202;
+const MAX_HEIGHT_PSEUDO = 48;
 
 //<STATISTIQUES></STATISTIQUES>
 
@@ -326,47 +325,45 @@ const generateImageMatch = (data) => {
         .catch(function (err) {
             console.error(err);
         });
+}
+
+const generateImageStats = (data) => {
+    let loadedImage;
+    let image = imageStats;
+
+    return Jimp.read(image)
+        .then(async function (img) {
+            loadedImage = img;
+
+            const HELVETICA_NEUE_LT_COM_76_BOLD_ITALIC_V2_STATS = await Jimp.loadFont(
+                __dirname + "/fonts/HELVETICA_NEUE_LT_COM_76_BOLD_ITALIC_V2_STATS.fnt"
+            );
+
+            loadedImage
+                //PSEUDO
+                .print(
+                    HELVETICA_NEUE_LT_COM_76_BOLD_ITALIC_V2_STATS,
+                    X_PSEUDO,
+                    Y_PSEUDO,
+                    {
+                        text: data.mode,
+                        alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
+                        alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
+                    },
+                    MAX_WIDTH_PSEUDO,
+                    MAX_HEIGHT_PSEUDO
+                );
+            return;
+        })
+        .then(async () => {
+            return await loadedImage.getBufferAsync(Jimp.MIME_PNG);
+        })
+        .catch(function (err) {
+            console.error(err);
+        });
+}
+
+module.exports = {
+    generateImageStats,
+    generateImageMatch
 };
-
-// const generateImageStats = (data) => {
-//     let loadedImage;
-//     let image = imageStats;
-
-//     return Jimp.read(image)
-//         .then(async function (img) {
-//             loadedImage = img;
-
-//             const HELVETICA_NEUE_53_EXTENDED_MODE = await Jimp.loadFont(
-//                 __dirname + "/fonts/HELVETICA_NEUE_53_EXTENDED_MODE.fnt"
-//             );
-
-//             loadedImage
-//                 //PSEUDO
-//                 .print(
-//                     HELVETICA_NEUE_53_EXTENDED_MODE,
-//                     X_PSEUDO,
-//                     Y_PSEUDO,
-//                     {
-//                         text: data.mode,
-//                         alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
-//                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
-//                     },
-//                     MAX_WIDTH_PSEUDO,
-//                     MAX_HEIGHT_PSEUDO
-//                 );
-//             return;
-//         })
-//         .then(async () => {
-//             return await loadedImage.getBufferAsync(Jimp.MIME_PNG);
-//         })
-//         .catch(function (err) {
-//             console.error(err);
-//         });
-// };
-
-module.exports = generateImageMatch;
-
-// module.exports = {
-//     generateImageStats,
-//     generateImageMatch
-// };
