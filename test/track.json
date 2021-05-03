@@ -1,0 +1,47 @@
+{
+    "top": 10,
+    "mode": "QUATUOR",
+    "matchEnded": 1618339017,
+    "players": [
+        {
+            "playerName": "BrickLayer",
+            "kdr": 10.00,
+            "kills": 10,
+            "deaths": 5,
+            "headshots": 2,
+            "damageDealt": 1200,
+            "damageTaken": 2000,
+            "reviver": 0
+        },
+        {
+            "playerName": "BrickLayer",
+            "kdr": 11.00,
+            "kills": 10,
+            "deaths": 5,
+            "headshots": 2,
+            "damageDealt": 1200,
+            "damageTaken": 2000,
+            "reviver": 0
+        },
+        {
+            "playerName": "BrickLayer",
+            "kdr": 0.00,
+            "kills": 10,
+            "deaths": 5,
+            "headshots": 2,
+            "damageDealt": 1200,
+            "damageTaken": 2000,
+            "reviver": 0
+        },
+        {
+            "playerName": "BrickLayer",
+            "kdr": 1.00,
+            "kills": 10,
+            "deaths": 5,
+            "headshots": 2,
+            "damageDealt": 1200,
+            "damageTaken": 2000,
+            "reviver": 0
+        }
+    ]
+}
