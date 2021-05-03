@@ -5,6 +5,7 @@ const imageSolo = __dirname + "/images/Solo.png";
 const imageDuo = __dirname + "/images/Duo.png";
 const imageTrio = __dirname + "/images/Trio.png";
 const imageQuator = __dirname + "/images/Quatuor.png";
+//const imageStats = __dirname + "/images/Stats.png";
 
 const X_NUMBER_TOP = 420;
 const Y_NUMBER_TOP = 272;
@@ -48,6 +49,15 @@ const MAX_HEIGHT_MODE = 48;
 const MAX_WIDTH_NAME = 423;
 const MAX_WIDTH_STATS = 131;
 const MAX_HEIGHT_LINE = 71;
+
+//<STATISTIQUES></STATISTIQUES>
+
+// const X_PSEUDO = 856;
+// const Y_PSEUDO = 144;
+// const MAX_WIDTH_PSEUDO = 202;
+// const MAX_HEIGHT_PSEUDO = 48;
+
+//<STATISTIQUES></STATISTIQUES>
 
 function unixTime(unixtime) {
     return moment(unixtime * 1000).format("D/MM/YY HH:mm:ss")
@@ -318,4 +328,45 @@ const generateImageMatch = (data) => {
         });
 };
 
+// const generateImageStats = (data) => {
+//     let loadedImage;
+//     let image = imageStats;
+
+//     return Jimp.read(image)
+//         .then(async function (img) {
+//             loadedImage = img;
+
+//             const HELVETICA_NEUE_53_EXTENDED_MODE = await Jimp.loadFont(
+//                 __dirname + "/fonts/HELVETICA_NEUE_53_EXTENDED_MODE.fnt"
+//             );
+
+//             loadedImage
+//                 //PSEUDO
+//                 .print(
+//                     HELVETICA_NEUE_53_EXTENDED_MODE,
+//                     X_PSEUDO,
+//                     Y_PSEUDO,
+//                     {
+//                         text: data.mode,
+//                         alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
+//                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
+//                     },
+//                     MAX_WIDTH_PSEUDO,
+//                     MAX_HEIGHT_PSEUDO
+//                 );
+//             return;
+//         })
+//         .then(async () => {
+//             return await loadedImage.getBufferAsync(Jimp.MIME_PNG);
+//         })
+//         .catch(function (err) {
+//             console.error(err);
+//         });
+// };
+
 module.exports = generateImageMatch;
+
+// module.exports = {
+//     generateImageStats,
+//     generateImageMatch
+// };
