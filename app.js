@@ -51,12 +51,51 @@ const MAX_HEIGHT_LINE = 71;
 
 //<STATISTIQUES></STATISTIQUES>
 
-const X_PSEUDO = 856;
-const Y_PSEUDO = 144;
-const MAX_WIDTH_PSEUDO = 202;
-const MAX_HEIGHT_PSEUDO = 48;
+const X_STATS_PSEUDO = 858;
+const Y_STATS_PSEUDO = 150;
+const MAX_WIDTH_STATS_PSEUDO = 202;
+const MAX_HEIGHT_STATS_PSEUDO = 48;
+
+const X_STATS_TIMEPLAYED = 890;
+const MAX_WIDTH_STATS_TIMEPLAYED = 380;
+const X_STATS_GAMESPLAYED = 1295;
+const X_STATS_WINPERCENTAGE = 1505;
+
+const Y_STATS_CAREER = 415;
+
+const X_STATS_TOTALWINS = 0;
+const X_STATS_TOP5 = 0;
+const X_STATS_TOP10 = 0;
+const X_STATS_TOP25 = 0;
+
+const Y_STATS_WINS = 0;
+
+const X_STATS_KILLS = 0;
+const X_STATS_DEATHS = 0;
+const X_STATS_KDR = 0;
+const X_STATS_KILLPERGAME = 0;
+
+const Y_STATS_PERFORMANCE = 0;
+
+const MAX_HEIGHT_STATS = 35;
+const MAX_WIDTH_STATS_BIS = 140;
+
 
 //<STATISTIQUES></STATISTIQUES>
+
+function secondsToDhm(seconds) {
+    seconds = Number(seconds);
+    
+    var d = Math.floor(seconds / (3600 * 24));
+    var h = Math.floor((seconds % (3600 * 24)) / 3600);
+    var m = Math.floor((seconds % 3600) / 60);
+
+    var dDisplay = d > 0 ? d + (d == 1 ? " day, " : " days, ") : "";
+    var hDisplay = h > 0 ? h + (h == 1 ? " hour, " : " hours, ") : "";
+    var mDisplay = m > 0 ? m + (m == 1 ? " min, " : " mins") : "";
+    
+    return dDisplay + hDisplay + mDisplay;
+}
 
 function unixTime(unixtime) {
     return moment(unixtime * 1000).format("D/MM/YY HH:mm:ss")
@@ -339,19 +378,61 @@ const generateImageStats = (data) => {
                 __dirname + "/fonts/HELVETICA_NEUE_LT_COM_76_BOLD_ITALIC_V2_STATS.fnt"
             );
 
+            const HELVETICA_NEUE_53_EXTENDED_MODE = await Jimp.loadFont(
+                __dirname + "/fonts/HELVETICA_NEUE_53_EXTENDED_MODE.fnt"
+            );
+
             loadedImage
                 //PSEUDO
                 .print(
                     HELVETICA_NEUE_LT_COM_76_BOLD_ITALIC_V2_STATS,
-                    X_PSEUDO,
-                    Y_PSEUDO,
+                    X_STATS_PSEUDO,
+                    Y_STATS_PSEUDO,
                     {
-                        text: data.mode,
+                        text: data.pseudo,
                         alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
-                    MAX_WIDTH_PSEUDO,
-                    MAX_HEIGHT_PSEUDO
+                    MAX_WIDTH_STATS_PSEUDO,
+                    MAX_HEIGHT_STATS_PSEUDO
+                )
+                //TIMEPLAYED
+                .print(
+                    HELVETICA_NEUE_53_EXTENDED_MODE,
+                    X_STATS_TIMEPLAYED,
+                    Y_STATS_CAREER,
+                    {
+                        text: secondsToDhm(data.timePlayed),
+                        alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
+                        alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
+                    },
+                    MAX_WIDTH_STATS_TIMEPLAYED,
+                    MAX_HEIGHT_STATS
+                )
+                //GAMEPLAYED
+                .print(
+                    HELVETICA_NEUE_53_EXTENDED_MODE,
+                    X_STATS_GAMESPLAYED,
+                    Y_STATS_CAREER,
+                    {
+                        text: data.gamesPlayed.toString(),
+                        alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
+                        alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
+                    },
+                    MAX_WIDTH_STATS_BIS,
+                    MAX_HEIGHT_STATS
+                //WINPERCENTAGE
+                ).print(
+                    HELVETICA_NEUE_53_EXTENDED_MODE,
+                    X_STATS_WINPERCENTAGE,
+                    Y_STATS_CAREER,
+                    {
+                        text: (data.wins / data.gamesPlayed * 100).toFixed(2) + '%',
+                        alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
+                        alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
+                    },
+                    MAX_WIDTH_STATS_BIS,
+                    MAX_HEIGHT_STATS
                 );
             return;
         })
