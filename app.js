@@ -49,8 +49,6 @@ const MAX_WIDTH_NAME = 423;
 const MAX_WIDTH_STATS = 131;
 const MAX_HEIGHT_LINE = 71;
 
-//<STATISTIQUES></STATISTIQUES>
-
 const X_STATS_PSEUDO = 858;
 const Y_STATS_PSEUDO = 150;
 const MAX_WIDTH_STATS_PSEUDO = 202;
@@ -63,25 +61,23 @@ const X_STATS_WINPERCENTAGE = 1505;
 
 const Y_STATS_CAREER = 415;
 
-const X_STATS_TOTALWINS = 0;
-const X_STATS_TOP5 = 0;
-const X_STATS_TOP10 = 0;
-const X_STATS_TOP25 = 0;
+const X_STATS_TOTALWINS = 915;
+const X_STATS_TOP5 = 1075;
+const X_STATS_TOP10 = 1273;
+const X_STATS_TOP25 = 1475;
 
-const Y_STATS_WINS = 0;
+const Y_STATS_WINS = 640;
 
-const X_STATS_KILLS = 0;
-const X_STATS_DEATHS = 0;
-const X_STATS_KDR = 0;
-const X_STATS_KILLPERGAME = 0;
+const X_STATS_KILLS = 883;
+const X_STATS_DEATHS = 1078;
+const X_STATS_KDR = 1262;
+const X_STATS_KILLPERGAME = 1490;
 
-const Y_STATS_PERFORMANCE = 0;
+const Y_STATS_PERFORMANCE = 860;
 
 const MAX_HEIGHT_STATS = 35;
 const MAX_WIDTH_STATS_BIS = 140;
 
-
-//<STATISTIQUES></STATISTIQUES>
 
 function secondsToDhm(seconds) {
     seconds = Number(seconds);
@@ -421,13 +417,118 @@ const generateImageStats = (data) => {
                     },
                     MAX_WIDTH_STATS_BIS,
                     MAX_HEIGHT_STATS
+                )
                 //WINPERCENTAGE
-                ).print(
+                .print(
                     HELVETICA_NEUE_53_EXTENDED_MODE,
                     X_STATS_WINPERCENTAGE,
                     Y_STATS_CAREER,
                     {
                         text: (data.wins / data.gamesPlayed * 100).toFixed(2) + '%',
+                        alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
+                        alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
+                    },
+                    MAX_WIDTH_STATS_BIS,
+                    MAX_HEIGHT_STATS
+                )
+                //TOTALWINS
+                .print(
+                    HELVETICA_NEUE_53_EXTENDED_MODE,
+                    X_STATS_TOTALWINS,
+                    Y_STATS_WINS,
+                    {
+                        text: data.wins.toString(),
+                        alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
+                        alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
+                    },
+                    MAX_WIDTH_STATS_BIS,
+                    MAX_HEIGHT_STATS
+                )
+                //TOP5
+                .print(
+                    HELVETICA_NEUE_53_EXTENDED_MODE,
+                    X_STATS_TOP5,
+                    Y_STATS_WINS,
+                    {
+                        text: data.topFive.toString(),
+                        alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
+                        alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
+                    },
+                    MAX_WIDTH_STATS_BIS,
+                    MAX_HEIGHT_STATS
+                )
+                //TOP10
+                .print(
+                    HELVETICA_NEUE_53_EXTENDED_MODE,
+                    X_STATS_TOP10,
+                    Y_STATS_WINS,
+                    {
+                        text: data.topTen.toString(),
+                        alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
+                        alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
+                    },
+                    MAX_WIDTH_STATS_BIS,
+                    MAX_HEIGHT_STATS
+                )
+                //TOP25
+                .print(
+                    HELVETICA_NEUE_53_EXTENDED_MODE,
+                    X_STATS_TOP25,
+                    Y_STATS_WINS,
+                    {
+                        text: data.topTwentyFive.toString(),
+                        alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
+                        alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
+                    },
+                    MAX_WIDTH_STATS_BIS,
+                    MAX_HEIGHT_STATS
+                )
+                //KILLS
+                .print(
+                    HELVETICA_NEUE_53_EXTENDED_MODE,
+                    X_STATS_KILLS,
+                    Y_STATS_PERFORMANCE,
+                    {
+                        text: data.kills.toString(),
+                        alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
+                        alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
+                    },
+                    MAX_WIDTH_STATS_BIS,
+                    MAX_HEIGHT_STATS
+                )
+                //DEATHS
+                .print(
+                    HELVETICA_NEUE_53_EXTENDED_MODE,
+                    X_STATS_DEATHS,
+                    Y_STATS_PERFORMANCE,
+                    {
+                        text: data.deaths.toString(),
+                        alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
+                        alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
+                    },
+                    MAX_WIDTH_STATS_BIS,
+                    MAX_HEIGHT_STATS
+                )
+                //KDR
+                .print(
+                    HELVETICA_NEUE_53_EXTENDED_MODE,
+                    X_STATS_KDR,
+                    Y_STATS_PERFORMANCE,
+                    {
+                        text: data.kdRatio.toFixed(2),
+                        alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
+                        alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
+                    },
+                    MAX_WIDTH_STATS_BIS,
+                    MAX_HEIGHT_STATS
+                )
+                //KILLPERGAME
+                .print(
+                    HELVETICA_NEUE_53_EXTENDED_MODE,
+                    X_STATS_KILLPERGAME,
+                    Y_STATS_PERFORMANCE,
+                    {
+                        text: (data.kills / data.gamesPlayed).toFixed(0),
                         alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
