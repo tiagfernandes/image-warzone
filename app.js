@@ -7,76 +7,81 @@ const imageTrio = __dirname + "/images/Trio.png";
 const imageQuator = __dirname + "/images/Quatuor.png";
 const imageStats = __dirname + "/images/Stats.png";
 
-const X_NUMBER_TOP = 420;
-const Y_NUMBER_TOP = 272;
-const MAX_WIDTH_NUMBER_TOP = 219;
-const MAX_HEIGHT_NUMBER_TOP = 92;
+//TRACK
+const X_TRACK_NUMBER_TOP = 420;
+const Y_TRACK_NUMBER_TOP = 272;
+const MAX_WIDTH_TRACK_NUMBER_TOP = 219;
+const MAX_HEIGHT_TRACK_NUMBER_TOP = 92;
 
-const Y_FIRST_LINE_SOLO = 570;
+const Y_TRACK_FIRST_LINE_SOLO = 570;
 
-const Y_FIRST_LINE_DUO = 550;
-const Y_SECOND_LINE_DUO = 648;
+const Y_TRACK_FIRST_LINE_DUO = 550;
+const Y_TRACK_SECOND_LINE_DUO = 648;
 
-const Y_FIRST_LINE_TRIO = 520;
-const Y_SECOND_LINE_TRIO = 618;
-const Y_THIRD_LINE_TRIO = 715;
+const Y_TRACK_FIRST_LINE_TRIO = 520;
+const Y_TRACK_SECOND_LINE_TRIO = 618;
+const Y_TRACK_THIRD_LINE_TRIO = 715;
 
-const Y_FIRST_LINE_QUATUOR = 500;
-const Y_SECOND_LINE_QUATUOR = 598;
+const Y_TRACK_FIRST_LINE_QUATUOR = 500;
+const Y_TRACK_SECOND_LINE_QUATUOR = 598;
 const Y_THIRD_LINE_QUATUOR = 695;
-const Y_FOURTH_LINE_QUATUOR = 793;
+const Y_TRACK_FOURTH_LINE_QUATUOR = 793;
 
-const X_NAME = 222;
-const X_KDR = 654;
-const X_KILLS = 806;
-const X_DEATHS = 962;
-const X_HS = 1114;
-const X_DAMMAGE_DEALT = 1268;
-const X_DAMMAGE_TAKEN = 1424;
-const X_REVIVER = 1574;
+const X_TRACK_NAME = 222;
+const X_TRACK_KDR = 654;
+const X_TRACK_KILLS = 806;
+const X_TRACK_DEATHS = 962;
+const X_TRACK_HS = 1114;
+const X_TRACK_DAMMAGE_DEALT = 1268;
+const X_TRACK_DAMMAGE_TAKEN = 1424;
+const X_TRACK_REVIVER = 1574;
 
-const X_DATE = 1530;
-const Y_DATE = 130;
-const MAX_WIDTH_DATE = 285;
-const MAX_HEIGHT_DATE = 42;
+const X_TRACK_DATE = 1530;
+const Y_TRACK_DATE = 130;
+const MAX_WIDTH_TRACK_DATE = 285;
+const MAX_HEIGHT_TRACK_DATE = 42;
 
-const X_MODE = 856;
-const Y_MODE = 144;
-const MAX_WIDTH_MODE = 202;
-const MAX_HEIGHT_MODE = 48;
+const X_TRACK_MODE = 856;
+const Y_TRACK_MODE = 144;
+const MAX_WIDTH_TRACK_MODE = 202;
+const MAX_HEIGHT_TRACK_MODE = 48;
 
-const MAX_WIDTH_NAME = 423;
-const MAX_WIDTH_STATS = 131;
-const MAX_HEIGHT_LINE = 71;
+const MAX_WIDTH_TRACK_NAME = 423;
+const MAX_WIDTH_TRACK_STATS = 131;
+const MAX_HEIGHT_TRACK_LINE = 71;
 
+//STATS
 const X_STATS_PSEUDO = 858;
 const Y_STATS_PSEUDO = 150;
 const MAX_WIDTH_STATS_PSEUDO = 202;
 const MAX_HEIGHT_STATS_PSEUDO = 48;
 
-const X_STATS_TIMEPLAYED = 890;
+//CAREER
+const X_STATS_TIMEPLAYED = 920;
 const MAX_WIDTH_STATS_TIMEPLAYED = 380;
-const X_STATS_GAMESPLAYED = 1295;
-const X_STATS_WINPERCENTAGE = 1505;
+const X_STATS_GAMESPLAYED = 1342;
+const X_STATS_WINPERCENTAGE = 1535;
 
 const Y_STATS_CAREER = 415;
 
-const X_STATS_TOTALWINS = 915;
-const X_STATS_TOP5 = 1075;
-const X_STATS_TOP10 = 1273;
-const X_STATS_TOP25 = 1475;
+//WINS
+const X_STATS_TOTALWINS = 970;
+const X_STATS_TOP5 = 1130;
+const X_STATS_TOP10 = 1330;
+const X_STATS_TOP25 = 1525;
 
 const Y_STATS_WINS = 640;
 
-const X_STATS_KILLS = 883;
-const X_STATS_DEATHS = 1078;
-const X_STATS_KDR = 1262;
-const X_STATS_KILLPERGAME = 1490;
+//PERFORMANCE
+const X_STATS_KILLS = 935;
+const X_STATS_DEATHS = 1128;
+const X_STATS_KDR = 1310;
+const X_STATS_KILLPERGAME = 1545;
 
 const Y_STATS_PERFORMANCE = 860;
 
 const MAX_HEIGHT_STATS = 35;
-const MAX_WIDTH_STATS_BIS = 140;
+const MAX_WIDTH_STATS = 140;
 
 
 function secondsToDhm(seconds) {
@@ -170,79 +175,79 @@ const generateImageMatch = (data) => {
                 //NUMBER TOP
                 .print(
                     frontTop(data.top),
-                    X_NUMBER_TOP,
-                    Y_NUMBER_TOP,
+                    X_TRACK_NUMBER_TOP,
+                    Y_TRACK_NUMBER_TOP,
                     {
                         text: data.top ? data.top.toString() : 0,
                         alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
-                    MAX_WIDTH_NUMBER_TOP,
-                    MAX_HEIGHT_NUMBER_TOP
+                    MAX_WIDTH_TRACK_NUMBER_TOP,
+                    MAX_HEIGHT_TRACK_NUMBER_TOP
                 )
                 //MATCH ENDED
                 .print(
                     HELVETICA_NEUE_53_EXTENDED_DATE,
-                    X_DATE,
-                    Y_DATE,
+                    X_TRACK_DATE,
+                    Y_TRACK_DATE,
                     {
                         text: unixTime(data.matchEnded),
                         alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
-                    MAX_WIDTH_DATE,
-                    MAX_HEIGHT_DATE
+                    MAX_WIDTH_TRACK_DATE,
+                    MAX_HEIGHT_TRACK_DATE
                 )
                 //MODE GAME
                 .print(
                     HELVETICA_NEUE_53_EXTENDED_MODE,
-                    X_MODE,
-                    Y_MODE,
+                    X_TRACK_MODE,
+                    Y_TRACK_MODE,
                     {
                         text: data.mode,
                         alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
-                    MAX_WIDTH_MODE,
-                    MAX_HEIGHT_MODE
+                    MAX_WIDTH_TRACK_MODE,
+                    MAX_HEIGHT_TRACK_MODE
                 );
 
             players.forEach((player, index) => {
-                let y = Y_FIRST_LINE_SOLO;
+                let y = Y_TRACK_FIRST_LINE_SOLO;
 
                 switch (players.length) {
                     case 1:
-                        y = Y_FIRST_LINE_SOLO;
+                        y = Y_TRACK_FIRST_LINE_SOLO;
                         break;
                     case 2:
                         y =
                             index === 0
-                                ? Y_FIRST_LINE_DUO
+                                ? Y_TRACK_FIRST_LINE_DUO
                                 : index === 1
-                                ? Y_SECOND_LINE_DUO
-                                : Y_FIRST_LINE_DUO;
+                                ? Y_TRACK_SECOND_LINE_DUO
+                                : Y_TRACK_FIRST_LINE_DUO;
                         break;
                     case 3:
                         y =
                             index === 0
-                                ? Y_FIRST_LINE_TRIO
+                                ? Y_TRACK_FIRST_LINE_TRIO
                                 : index === 1
-                                ? Y_SECOND_LINE_TRIO
+                                ? Y_TRACK_SECOND_LINE_TRIO
                                 : index === 2
-                                ? Y_THIRD_LINE_TRIO
-                                : Y_FIRST_LINE_TRIO;
+                                ? Y_TRACK_THIRD_LINE_TRIO
+                                : Y_TRACK_FIRST_LINE_TRIO;
                         break;
                     case 4:
                         y =
                             index === 0
-                                ? Y_FIRST_LINE_QUATUOR
+                                ? Y_TRACK_FIRST_LINE_QUATUOR
                                 : index === 1
-                                ? Y_SECOND_LINE_QUATUOR
+                                ? Y_TRACK_SECOND_LINE_QUATUOR
                                 : index === 2
                                 ? Y_THIRD_LINE_QUATUOR
                                 : index === 3
-                                ? Y_FOURTH_LINE_QUATUOR
-                                : Y_FIRST_LINE_QUATUOR;
+                                ? Y_TRACK_FOURTH_LINE_QUATUOR
+                                : Y_TRACK_FIRST_LINE_QUATUOR;
                         break;
                 }
 
@@ -250,106 +255,106 @@ const generateImageMatch = (data) => {
                     //Name
                     .print(
                         HELVETICA_NEUE_53_EXTENDED,
-                        X_NAME,
+                        X_TRACK_NAME,
                         y,
                         {
                             text: player.playerName.toUpperCase(),
                             alignmentX: Jimp.HORIZONTAL_ALIGN_LEFT,
                             alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                         },
-                        MAX_WIDTH_NAME,
-                        MAX_HEIGHT_LINE
+                        MAX_WIDTH_TRACK_NAME,
+                        MAX_HEIGHT_TRACK_LINE
                     )
                     //KDR
                     .print(
                         HELVETICA_NEUE_LT_STD_83_HEAVY_EXTENDED,
-                        X_KDR,
+                        X_TRACK_KDR,
                         y,
                         {
                             text: player.kdr.toFixed(2).toString(),
                             alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
                             alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                         },
-                        MAX_WIDTH_STATS,
-                        MAX_HEIGHT_LINE
+                        MAX_WIDTH_TRACK_STATS,
+                        MAX_HEIGHT_TRACK_LINE
                     )
                     //KILLS
                     .print(
                         HELVETICA_NEUE_53_EXTENDED,
-                        X_KILLS,
+                        X_TRACK_KILLS,
                         y,
                         {
                             text: player.kills.toString(),
                             alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
                             alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                         },
-                        MAX_WIDTH_STATS,
-                        MAX_HEIGHT_LINE
+                        MAX_WIDTH_TRACK_STATS,
+                        MAX_HEIGHT_TRACK_LINE
                     )
                     //DEATHS
                     .print(
                         HELVETICA_NEUE_53_EXTENDED,
-                        X_DEATHS,
+                        X_TRACK_DEATHS,
                         y,
                         {
                             text: player.deaths.toString(),
                             alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
                             alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                         },
-                        MAX_WIDTH_STATS,
-                        MAX_HEIGHT_LINE
+                        MAX_WIDTH_TRACK_STATS,
+                        MAX_HEIGHT_TRACK_LINE
                     )
                     //HS
                     .print(
                         HELVETICA_NEUE_53_EXTENDED,
-                        X_HS,
+                        X_TRACK_HS,
                         y,
                         {
                             text: player.headshots.toString(),
                             alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
                             alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                         },
-                        MAX_WIDTH_STATS,
-                        MAX_HEIGHT_LINE
+                        MAX_WIDTH_TRACK_STATS,
+                        MAX_HEIGHT_TRACK_LINE
                     )
                     //DAMAGE DEALT
                     .print(
                         HELVETICA_NEUE_53_EXTENDED,
-                        X_DAMMAGE_DEALT,
+                        X_TRACK_DAMMAGE_DEALT,
                         y,
                         {
                             text: player.damageDealt.toString(),
                             alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
                             alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                         },
-                        MAX_WIDTH_STATS,
-                        MAX_HEIGHT_LINE
+                        MAX_WIDTH_TRACK_STATS,
+                        MAX_HEIGHT_TRACK_LINE
                     )
                     //DAMAGE TAKEN
                     .print(
                         HELVETICA_NEUE_53_EXTENDED,
-                        X_DAMMAGE_TAKEN,
+                        X_TRACK_DAMMAGE_TAKEN,
                         y,
                         {
                             text: player.damageTaken.toString(),
                             alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
                             alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                         },
-                        MAX_WIDTH_STATS,
-                        MAX_HEIGHT_LINE
+                        MAX_WIDTH_TRACK_STATS,
+                        MAX_HEIGHT_TRACK_LINE
                     )
                     //REVIVER
                     .print(
                         HELVETICA_NEUE_53_EXTENDED,
-                        X_REVIVER,
+                        X_TRACK_REVIVER,
                         y,
                         {
                             text: player.reviver.toString(),
                             alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
                             alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                         },
-                        MAX_WIDTH_STATS,
-                        MAX_HEIGHT_LINE
+                        MAX_WIDTH_TRACK_STATS,
+                        MAX_HEIGHT_TRACK_LINE
                     );
             });
             return;
@@ -399,7 +404,7 @@ const generateImageStats = (data) => {
                     Y_STATS_CAREER,
                     {
                         text: secondsToDhm(data.timePlayed),
-                        alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
+                        alignmentX: Jimp.HORIZONTAL_ALIGN_LEFT,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
                     MAX_WIDTH_STATS_TIMEPLAYED,
@@ -412,10 +417,10 @@ const generateImageStats = (data) => {
                     Y_STATS_CAREER,
                     {
                         text: data.gamesPlayed.toString(),
-                        alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
+                        alignmentX: Jimp.HORIZONTAL_ALIGN_LEFT,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
-                    MAX_WIDTH_STATS_BIS,
+                    MAX_WIDTH_STATS,
                     MAX_HEIGHT_STATS
                 )
                 //WINPERCENTAGE
@@ -425,10 +430,10 @@ const generateImageStats = (data) => {
                     Y_STATS_CAREER,
                     {
                         text: (data.wins / data.gamesPlayed * 100).toFixed(2) + '%',
-                        alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
+                        alignmentX: Jimp.HORIZONTAL_ALIGN_LEFT,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
-                    MAX_WIDTH_STATS_BIS,
+                    MAX_WIDTH_STATS,
                     MAX_HEIGHT_STATS
                 )
                 //TOTALWINS
@@ -438,10 +443,10 @@ const generateImageStats = (data) => {
                     Y_STATS_WINS,
                     {
                         text: data.wins.toString(),
-                        alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
+                        alignmentX: Jimp.HORIZONTAL_ALIGN_LEFT,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
-                    MAX_WIDTH_STATS_BIS,
+                    MAX_WIDTH_STATS,
                     MAX_HEIGHT_STATS
                 )
                 //TOP5
@@ -451,10 +456,10 @@ const generateImageStats = (data) => {
                     Y_STATS_WINS,
                     {
                         text: data.topFive.toString(),
-                        alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
+                        alignmentX: Jimp.HORIZONTAL_ALIGN_LEFT,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
-                    MAX_WIDTH_STATS_BIS,
+                    MAX_WIDTH_STATS,
                     MAX_HEIGHT_STATS
                 )
                 //TOP10
@@ -464,10 +469,10 @@ const generateImageStats = (data) => {
                     Y_STATS_WINS,
                     {
                         text: data.topTen.toString(),
-                        alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
+                        alignmentX: Jimp.HORIZONTAL_ALIGN_LEFT,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
-                    MAX_WIDTH_STATS_BIS,
+                    MAX_WIDTH_STATS,
                     MAX_HEIGHT_STATS
                 )
                 //TOP25
@@ -477,10 +482,10 @@ const generateImageStats = (data) => {
                     Y_STATS_WINS,
                     {
                         text: data.topTwentyFive.toString(),
-                        alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
+                        alignmentX: Jimp.HORIZONTAL_ALIGN_LEFT,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
-                    MAX_WIDTH_STATS_BIS,
+                    MAX_WIDTH_STATS,
                     MAX_HEIGHT_STATS
                 )
                 //KILLS
@@ -490,10 +495,10 @@ const generateImageStats = (data) => {
                     Y_STATS_PERFORMANCE,
                     {
                         text: data.kills.toString(),
-                        alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
+                        alignmentX: Jimp.HORIZONTAL_ALIGN_LEFT,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
-                    MAX_WIDTH_STATS_BIS,
+                    MAX_WIDTH_STATS,
                     MAX_HEIGHT_STATS
                 )
                 //DEATHS
@@ -503,10 +508,10 @@ const generateImageStats = (data) => {
                     Y_STATS_PERFORMANCE,
                     {
                         text: data.deaths.toString(),
-                        alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
+                        alignmentX: Jimp.HORIZONTAL_ALIGN_LEFT,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
-                    MAX_WIDTH_STATS_BIS,
+                    MAX_WIDTH_STATS,
                     MAX_HEIGHT_STATS
                 )
                 //KDR
@@ -516,10 +521,10 @@ const generateImageStats = (data) => {
                     Y_STATS_PERFORMANCE,
                     {
                         text: data.kdRatio.toFixed(2),
-                        alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
+                        alignmentX: Jimp.HORIZONTAL_ALIGN_LEFT,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
-                    MAX_WIDTH_STATS_BIS,
+                    MAX_WIDTH_STATS,
                     MAX_HEIGHT_STATS
                 )
                 //KILLPERGAME
@@ -529,10 +534,10 @@ const generateImageStats = (data) => {
                     Y_STATS_PERFORMANCE,
                     {
                         text: (data.kills / data.gamesPlayed).toFixed(0),
-                        alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
+                        alignmentX: Jimp.HORIZONTAL_ALIGN_LEFT,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
-                    MAX_WIDTH_STATS_BIS,
+                    MAX_WIDTH_STATS,
                     MAX_HEIGHT_STATS
                 );
             return;
