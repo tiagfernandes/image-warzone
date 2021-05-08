@@ -59,24 +59,24 @@ const MAX_HEIGHT_STATS_PSEUDO = 48;
 //CAREER
 const X_STATS_TIMEPLAYED = 920;
 const MAX_WIDTH_STATS_TIMEPLAYED = 380;
-const X_STATS_GAMESPLAYED = 1342;
+const X_STATS_GAMESPLAYED = 1300;
 const X_STATS_WINPERCENTAGE = 1535;
 
 const Y_STATS_CAREER = 415;
 
 //WINS
-const X_STATS_TOTALWINS = 970;
-const X_STATS_TOP5 = 1130;
-const X_STATS_TOP10 = 1330;
-const X_STATS_TOP25 = 1525;
+const X_STATS_TOTALWINS = 915;
+const X_STATS_TOP5 = 1075;
+const X_STATS_TOP10 = 1272;
+const X_STATS_TOP25 = 1475;
 
 const Y_STATS_WINS = 640;
 
 //PERFORMANCE
-const X_STATS_KILLS = 935;
-const X_STATS_DEATHS = 1128;
-const X_STATS_KDR = 1310;
-const X_STATS_KILLPERGAME = 1545;
+const X_STATS_KILLS = 883;
+const X_STATS_DEATHS = 1080;
+const X_STATS_KDR = 1307;
+const X_STATS_KILLPERGAME = 1547;
 
 const Y_STATS_PERFORMANCE = 860;
 
@@ -417,7 +417,7 @@ const generateImageStats = (data) => {
                     Y_STATS_CAREER,
                     {
                         text: data.gamesPlayed.toString(),
-                        alignmentX: Jimp.HORIZONTAL_ALIGN_LEFT,
+                        alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
                     MAX_WIDTH_STATS,
@@ -443,7 +443,7 @@ const generateImageStats = (data) => {
                     Y_STATS_WINS,
                     {
                         text: data.wins.toString(),
-                        alignmentX: Jimp.HORIZONTAL_ALIGN_LEFT,
+                        alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
                     MAX_WIDTH_STATS,
@@ -456,7 +456,7 @@ const generateImageStats = (data) => {
                     Y_STATS_WINS,
                     {
                         text: data.topFive.toString(),
-                        alignmentX: Jimp.HORIZONTAL_ALIGN_LEFT,
+                        alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
                     MAX_WIDTH_STATS,
@@ -469,7 +469,7 @@ const generateImageStats = (data) => {
                     Y_STATS_WINS,
                     {
                         text: data.topTen.toString(),
-                        alignmentX: Jimp.HORIZONTAL_ALIGN_LEFT,
+                        alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
                     MAX_WIDTH_STATS,
@@ -482,7 +482,7 @@ const generateImageStats = (data) => {
                     Y_STATS_WINS,
                     {
                         text: data.topTwentyFive.toString(),
-                        alignmentX: Jimp.HORIZONTAL_ALIGN_LEFT,
+                        alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
                     MAX_WIDTH_STATS,
@@ -495,7 +495,7 @@ const generateImageStats = (data) => {
                     Y_STATS_PERFORMANCE,
                     {
                         text: data.kills.toString(),
-                        alignmentX: Jimp.HORIZONTAL_ALIGN_LEFT,
+                        alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
                     MAX_WIDTH_STATS,
@@ -508,7 +508,7 @@ const generateImageStats = (data) => {
                     Y_STATS_PERFORMANCE,
                     {
                         text: data.deaths.toString(),
-                        alignmentX: Jimp.HORIZONTAL_ALIGN_LEFT,
+                        alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
                     MAX_WIDTH_STATS,
