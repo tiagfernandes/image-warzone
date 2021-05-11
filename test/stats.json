@@ -1,12 +1,24 @@
 {
     "pseudo": "Baldy",
-    "wins": 9,
-    "kills": 697,
-    "deaths": 679,
-    "kdRatio": 1.0265095729013254,
-    "topTen": 61,
-    "topFive": 31,
-    "topTwentyFive": 199,
-    "gamesPlayed": 242,
-    "timePlayed": 249973
+    "oldStats": {
+        "wins": 9,
+        "kills": 697,
+        "deaths": 679,
+        "kdRatio": 1.0265095729013254,
+        "topTen": 61,
+        "topFive": 31,
+        "topTwentyFive": 199,
+        "gamesPlayed": 242
+    },
+    "newStats": {
+        "wins": 10,
+        "kills": 700,
+        "deaths": 679,
+        "kdRatio": 1.030927835051546,
+        "topTen": 61,
+        "topFive": 31,
+        "topTwentyFive": 199,
+        "gamesPlayed": 243,
+        "timePlayed": 249973
+    }
 }

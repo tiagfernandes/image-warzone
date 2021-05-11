@@ -60,7 +60,7 @@ const MAX_HEIGHT_STATS_PSEUDO = 48;
 const X_STATS_TIMEPLAYED = 920;
 const MAX_WIDTH_STATS_TIMEPLAYED = 380;
 const X_STATS_GAMESPLAYED = 1300;
-const X_STATS_WINPERCENTAGE = 1535;
+const X_STATS_WINPERCENTAGE = 1515;
 
 const Y_STATS_CAREER = 415;
 
@@ -81,7 +81,7 @@ const X_STATS_KILLPERGAME = 1547;
 const Y_STATS_PERFORMANCE = 860;
 
 const MAX_HEIGHT_STATS = 35;
-const MAX_WIDTH_STATS = 140;
+const MAX_WIDTH_STATS = 180;
 
 
 function secondsToDhm(seconds) {
@@ -371,6 +371,17 @@ const generateImageStats = (data) => {
     let loadedImage;
     let image = imageStats;
 
+    let compareGamePlayed = data.newStats.gamesPlayed - data.oldStats.gamesPlayed;
+    let compareWinPercentage = (data.newStats.wins / data.newStats.gamesPlayed * 100) - (data.oldStats.wins / data.oldStats.gamesPlayed * 100)
+    let compareTotalWins = data.newStats.wins - data.oldStats.wins;
+    let compareTop5 = data.newStats.topFive - data.oldStats.topFive;
+    let compareTop10 = data.newStats.topTen - data.oldStats.topTen;
+    let compareTop25 = data.newStats.topTwentyFive - data.oldStats.topTwentyFive;
+    let compareKills = data.newStats.kills - data.oldStats.kills;
+    let compareDeaths = data.newStats.deaths - data.oldStats.deaths;
+    let compareKDR = data.newStats.kdRatio - data.oldStats.kdRatio;
+    let compareKillPerGame = (data.newStats.kills / data.newStats.gamesPlayed) - (data.oldStats.kills / data.oldStats.gamesPlayed)
+
     return Jimp.read(image)
         .then(async function (img) {
             loadedImage = img;
@@ -403,7 +414,7 @@ const generateImageStats = (data) => {
                     X_STATS_TIMEPLAYED,
                     Y_STATS_CAREER,
                     {
-                        text: secondsToDhm(data.timePlayed),
+                        text: secondsToDhm(data.newStats.timePlayed),
                         alignmentX: Jimp.HORIZONTAL_ALIGN_LEFT,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
@@ -416,7 +427,7 @@ const generateImageStats = (data) => {
                     X_STATS_GAMESPLAYED,
                     Y_STATS_CAREER,
                     {
-                        text: data.gamesPlayed.toString(),
+                        text: data.newStats.gamesPlayed.toString() + '(+' + compareGamePlayed.toString() + ')',
                         alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
@@ -429,7 +440,7 @@ const generateImageStats = (data) => {
                     X_STATS_WINPERCENTAGE,
                     Y_STATS_CAREER,
                     {
-                        text: (data.wins / data.gamesPlayed * 100).toFixed(2) + '%',
+                        text: (data.newStats.wins / data.newStats.gamesPlayed * 100).toFixed(2) + '%' + '(+' + compareWinPercentage.toFixed(2) + ')',
                         alignmentX: Jimp.HORIZONTAL_ALIGN_LEFT,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
@@ -442,7 +453,7 @@ const generateImageStats = (data) => {
                     X_STATS_TOTALWINS,
                     Y_STATS_WINS,
                     {
-                        text: data.wins.toString(),
+                        text: data.newStats.wins.toString() + '(+' + compareTotalWins.toString() + ')',
                         alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
@@ -455,7 +466,7 @@ const generateImageStats = (data) => {
                     X_STATS_TOP5,
                     Y_STATS_WINS,
                     {
-                        text: data.topFive.toString(),
+                        text: data.newStats.topFive.toString(),
                         alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
@@ -468,7 +479,7 @@ const generateImageStats = (data) => {
                     X_STATS_TOP10,
                     Y_STATS_WINS,
                     {
-                        text: data.topTen.toString(),
+                        text: data.newStats.topTen.toString(),
                         alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
@@ -481,7 +492,7 @@ const generateImageStats = (data) => {
                     X_STATS_TOP25,
                     Y_STATS_WINS,
                     {
-                        text: data.topTwentyFive.toString(),
+                        text: data.newStats.topTwentyFive.toString(),
                         alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
@@ -494,7 +505,7 @@ const generateImageStats = (data) => {
                     X_STATS_KILLS,
                     Y_STATS_PERFORMANCE,
                     {
-                        text: data.kills.toString(),
+                        text: data.newStats.kills.toString(),
                         alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
@@ -507,7 +518,7 @@ const generateImageStats = (data) => {
                     X_STATS_DEATHS,
                     Y_STATS_PERFORMANCE,
                     {
-                        text: data.deaths.toString(),
+                        text: data.newStats.deaths.toString(),
                         alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
@@ -520,7 +531,7 @@ const generateImageStats = (data) => {
                     X_STATS_KDR,
                     Y_STATS_PERFORMANCE,
                     {
-                        text: data.kdRatio.toFixed(2),
+                        text: data.newStats.kdRatio.toFixed(2),
                         alignmentX: Jimp.HORIZONTAL_ALIGN_LEFT,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
@@ -533,7 +544,7 @@ const generateImageStats = (data) => {
                     X_STATS_KILLPERGAME,
                     Y_STATS_PERFORMANCE,
                     {
-                        text: (data.kills / data.gamesPlayed).toFixed(0),
+                        text: (data.newStats.kills / data.newStats.gamesPlayed).toFixed(0),
                         alignmentX: Jimp.HORIZONTAL_ALIGN_LEFT,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
