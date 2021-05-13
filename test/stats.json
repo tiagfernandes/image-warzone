@@ -12,13 +12,13 @@
     },
     "newStats": {
         "wins": 10,
-        "kills": 700,
-        "deaths": 679,
+        "kills": 800,
+        "deaths": 680,
         "kdRatio": 1.030927835051546,
-        "topTen": 61,
-        "topFive": 31,
-        "topTwentyFive": 199,
-        "gamesPlayed": 243,
+        "topTen": 62,
+        "topFive": 32,
+        "topTwentyFive": 200,
+        "gamesPlayed": 242,
         "timePlayed": 249973
     }
 }

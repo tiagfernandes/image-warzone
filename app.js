@@ -380,7 +380,7 @@ const generateImageStats = (data) => {
     let compareKills = data.newStats.kills - data.oldStats.kills;
     let compareDeaths = data.newStats.deaths - data.oldStats.deaths;
     let compareKDR = data.newStats.kdRatio - data.oldStats.kdRatio;
-    let compareKillPerGame = (data.newStats.kills / data.newStats.gamesPlayed) - (data.oldStats.kills / data.oldStats.gamesPlayed)
+    let compareKillPerGame = (data.newStats.kills / data.newStats.gamesPlayed) - (data.oldStats.kills / data.oldStats.gamesPlayed);
 
     return Jimp.read(image)
         .then(async function (img) {
@@ -427,7 +427,7 @@ const generateImageStats = (data) => {
                     X_STATS_GAMESPLAYED,
                     Y_STATS_CAREER,
                     {
-                        text: data.newStats.gamesPlayed.toString() + '(+' + compareGamePlayed.toString() + ')',
+                        text: data.newStats.gamesPlayed.toString() + (compareGamePlayed<0?"(":"(+") + compareGamePlayed.toString() + ')',
                         alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
@@ -440,7 +440,7 @@ const generateImageStats = (data) => {
                     X_STATS_WINPERCENTAGE,
                     Y_STATS_CAREER,
                     {
-                        text: (data.newStats.wins / data.newStats.gamesPlayed * 100).toFixed(2) + '%' + '(+' + compareWinPercentage.toFixed(2) + ')',
+                        text: (data.newStats.wins / data.newStats.gamesPlayed * 100).toFixed(2) + '%' + (compareWinPercentage<0?"(":"(+") + compareWinPercentage.toFixed(2) + ')',
                         alignmentX: Jimp.HORIZONTAL_ALIGN_LEFT,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
@@ -453,7 +453,7 @@ const generateImageStats = (data) => {
                     X_STATS_TOTALWINS,
                     Y_STATS_WINS,
                     {
-                        text: data.newStats.wins.toString() + '(+' + compareTotalWins.toString() + ')',
+                        text: data.newStats.wins.toString() + (compareTotalWins<1?"":"(+" + compareTotalWins.toString() + ')'),
                         alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
@@ -466,7 +466,7 @@ const generateImageStats = (data) => {
                     X_STATS_TOP5,
                     Y_STATS_WINS,
                     {
-                        text: data.newStats.topFive.toString(),
+                        text: data.newStats.topFive.toString() + (compareTop5<1?"":"(+" + compareTop5.toString() + ')'),
                         alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
@@ -479,7 +479,7 @@ const generateImageStats = (data) => {
                     X_STATS_TOP10,
                     Y_STATS_WINS,
                     {
-                        text: data.newStats.topTen.toString(),
+                        text: data.newStats.topTen.toString() + (compareTop10<1?"":"(+" + compareTop10.toString() + ')'),
                         alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
@@ -492,7 +492,7 @@ const generateImageStats = (data) => {
                     X_STATS_TOP25,
                     Y_STATS_WINS,
                     {
-                        text: data.newStats.topTwentyFive.toString(),
+                        text: data.newStats.topTwentyFive.toString() + (compareTop25<1?"":"(+" + compareTop25.toString() + ')'),
                         alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
@@ -505,7 +505,7 @@ const generateImageStats = (data) => {
                     X_STATS_KILLS,
                     Y_STATS_PERFORMANCE,
                     {
-                        text: data.newStats.kills.toString(),
+                        text: data.newStats.kills.toString() + (compareKills<1?"":"(+" + compareKills.toString() + ')'),
                         alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
@@ -518,7 +518,7 @@ const generateImageStats = (data) => {
                     X_STATS_DEATHS,
                     Y_STATS_PERFORMANCE,
                     {
-                        text: data.newStats.deaths.toString(),
+                        text: data.newStats.deaths.toString() + (compareDeaths<1?"":"(+" + compareDeaths.toString() + ')'),
                         alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
@@ -531,7 +531,7 @@ const generateImageStats = (data) => {
                     X_STATS_KDR,
                     Y_STATS_PERFORMANCE,
                     {
-                        text: data.newStats.kdRatio.toFixed(2),
+                        text: data.newStats.kdRatio.toFixed(2) + (compareKDR<0?"(":"(+") + compareKDR.toFixed(2) + ')',
                         alignmentX: Jimp.HORIZONTAL_ALIGN_LEFT,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
