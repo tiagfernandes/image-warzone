@@ -59,29 +59,29 @@ const MAX_HEIGHT_STATS_PSEUDO = 48;
 //CAREER
 const X_STATS_TIMEPLAYED = 920;
 const MAX_WIDTH_STATS_TIMEPLAYED = 380;
-const X_STATS_GAMESPLAYED = 1300;
-const X_STATS_WINPERCENTAGE = 1515;
+const X_STATS_GAMESPLAYED = 1311;
+const X_STATS_WINPERCENTAGE = 1510;
 
 const Y_STATS_CAREER = 415;
 
 //WINS
-const X_STATS_TOTALWINS = 915;
-const X_STATS_TOP5 = 1075;
-const X_STATS_TOP10 = 1272;
-const X_STATS_TOP25 = 1475;
+const X_STATS_TOTALWINS = 936;
+const X_STATS_TOP5 = 1120;
+const X_STATS_TOP10 = 1310;
+const X_STATS_TOP25 = 1511;
 
 const Y_STATS_WINS = 640;
 
 //PERFORMANCE
-const X_STATS_KILLS = 883;
-const X_STATS_DEATHS = 1080;
+const X_STATS_KILLS = 932;
+const X_STATS_DEATHS = 1115;
 const X_STATS_KDR = 1307;
-const X_STATS_KILLPERGAME = 1547;
+const X_STATS_KILLPERGAME = 1510;
 
 const Y_STATS_PERFORMANCE = 860;
 
 const MAX_HEIGHT_STATS = 35;
-const MAX_WIDTH_STATS = 180;
+const MAX_WIDTH_STATS = 250;
 
 function secondsToDhm(seconds) {
     seconds = Number(seconds);
@@ -401,6 +401,16 @@ const getCompareValue = (
     return a;
 };
 
+const difNewOld = (value1, value2) => {
+    if (value1 < value2) {
+        return -1;
+    } else if (value1 == value2) {
+        return 0;
+    } else if (value1 > value2) {
+        return 1;
+    }
+};
+
 const generateImageStats = (data) => {
     let loadedImage;
     let image = imageStats;
@@ -418,6 +428,9 @@ const generateImageStats = (data) => {
             const HELVETICA_NEUE_53_EXTENDED_MODE = await Jimp.loadFont(
                 __dirname + "/fonts/HELVETICA_NEUE_53_EXTENDED_MODE.fnt"
             );
+
+            const STATS_UP = await Jimp.read("images/Stats_up.png");
+            const STATS_DOWN = await Jimp.read("images/Stats_down.png");
 
             loadedImage
                 //PSEUDO
@@ -456,36 +469,55 @@ const generateImageStats = (data) => {
                             data.newStats.gamesPlayed,
                             data.oldStats ? data.oldStats.gamesPlayed : null
                         ),
-                        alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
-                        alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
-                    },
-                    MAX_WIDTH_STATS,
-                    MAX_HEIGHT_STATS
-                )
-                //WINPERCENTAGE
-                .print(
-                    HELVETICA_NEUE_53_EXTENDED_MODE,
-                    X_STATS_WINPERCENTAGE,
-                    Y_STATS_CAREER,
-                    {
-                        text: getCompareValue(
-                            (data.newStats.wins / data.newStats.gamesPlayed) *
-                                100,
-                            data.oldStats
-                                ? (data.oldStats.wins /
-                                      data.oldStats.gamesPlayed) *
-                                      100
-                                : null,
-                            true,
-                            true
-                        ),
                         alignmentX: Jimp.HORIZONTAL_ALIGN_LEFT,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
                     MAX_WIDTH_STATS,
                     MAX_HEIGHT_STATS
-                )
-                //TOTALWINS
+                );
+            //WINPERCENTAGE
+            if (data.oldStats) {
+                const dif = difNewOld(
+                    (data.newStats.wins / data.newStats.gamesPlayed) * 100,
+                    (data.oldStats.wins / data.oldStats.gamesPlayed) * 100
+                );
+
+                if (dif == -1) {
+                    loadedImage.blit(STATS_DOWN, 1455, 395);
+                } else if (dif == 1) {
+                    loadedImage.blit(STATS_UP, 1455, 395);
+                }
+            }
+            loadedImage.print(
+                HELVETICA_NEUE_53_EXTENDED_MODE,
+                X_STATS_WINPERCENTAGE,
+                Y_STATS_CAREER,
+                {
+                    text: getCompareValue(
+                        (data.newStats.wins / data.newStats.gamesPlayed) * 100,
+                        data.oldStats
+                            ? (data.oldStats.wins / data.oldStats.gamesPlayed) *
+                                  100
+                            : null,
+                        true,
+                        true
+                    ),
+                    alignmentX: Jimp.HORIZONTAL_ALIGN_LEFT,
+                    alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
+                },
+                MAX_WIDTH_STATS,
+                MAX_HEIGHT_STATS
+            );
+
+            if (data.oldStats) {
+                const dif = difNewOld(data.newStats.wins, data.oldStats.wins);
+
+                if (dif == 1) {
+                    loadedImage.blit(STATS_UP, 880, 620);
+                }
+            }
+            //TOTALWINS
+            loadedImage
                 .print(
                     HELVETICA_NEUE_53_EXTENDED_MODE,
                     X_STATS_TOTALWINS,
@@ -495,7 +527,7 @@ const generateImageStats = (data) => {
                             data.newStats.wins,
                             data.oldStats ? data.oldStats.wins : null
                         ),
-                        alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
+                        alignmentX: Jimp.HORIZONTAL_ALIGN_LEFT,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
                     MAX_WIDTH_STATS,
@@ -511,7 +543,7 @@ const generateImageStats = (data) => {
                             data.newStats.topFive,
                             data.oldStats ? data.oldStats.topFive : null
                         ),
-                        alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
+                        alignmentX: Jimp.HORIZONTAL_ALIGN_LEFT,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
                     MAX_WIDTH_STATS,
@@ -527,7 +559,7 @@ const generateImageStats = (data) => {
                             data.newStats.topTen,
                             data.oldStats ? data.oldStats.topTen : null
                         ),
-                        alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
+                        alignmentX: Jimp.HORIZONTAL_ALIGN_LEFT,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
                     MAX_WIDTH_STATS,
@@ -543,7 +575,7 @@ const generateImageStats = (data) => {
                             data.newStats.topTwentyFive,
                             data.oldStats ? data.oldStats.topTwentyFive : null
                         ),
-                        alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
+                        alignmentX: Jimp.HORIZONTAL_ALIGN_LEFT,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
                     MAX_WIDTH_STATS,
@@ -559,7 +591,7 @@ const generateImageStats = (data) => {
                             data.newStats.kills,
                             data.oldStats ? data.oldStats.kills : null
                         ),
-                        alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
+                        alignmentX: Jimp.HORIZONTAL_ALIGN_LEFT,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
                     MAX_WIDTH_STATS,
@@ -575,49 +607,72 @@ const generateImageStats = (data) => {
                             data.newStats.deaths,
                             data.oldStats ? data.oldStats.deaths : null
                         ),
-                        alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
-                        alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
-                    },
-                    MAX_WIDTH_STATS,
-                    MAX_HEIGHT_STATS
-                )
-                //KDR
-                .print(
-                    HELVETICA_NEUE_53_EXTENDED_MODE,
-                    X_STATS_KDR,
-                    Y_STATS_PERFORMANCE,
-                    {
-                        text: getCompareValue(
-                            data.newStats.deaths,
-                            data.oldStats ? data.oldStats.deaths : null,
-                            true
-                        ),
-                        alignmentX: Jimp.HORIZONTAL_ALIGN_LEFT,
-                        alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
-                    },
-                    MAX_WIDTH_STATS,
-                    MAX_HEIGHT_STATS
-                )
-                //KILLPERGAME
-                .print(
-                    HELVETICA_NEUE_53_EXTENDED_MODE,
-                    X_STATS_KILLPERGAME,
-                    Y_STATS_PERFORMANCE,
-                    {
-                        text: getCompareValue(
-                            data.newStats.kills / data.newStats.gamesPlayed,
-                            data.oldStats
-                                ? data.oldStats.kills /
-                                      data.oldStats.gamesPlayed
-                                : null,
-                            true
-                        ),
                         alignmentX: Jimp.HORIZONTAL_ALIGN_LEFT,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
                     MAX_WIDTH_STATS,
                     MAX_HEIGHT_STATS
                 );
+            //KDR
+            if (data.oldStats) {
+                const dif = difNewOld(
+                    data.newStats.kdRatio,
+                    data.oldStats.kdRatio
+                );
+
+                if (dif == -1) {
+                    loadedImage.blit(STATS_DOWN, 1250, 840);
+                } else if (dif == 1) {
+                    loadedImage.blit(STATS_UP, 1250, 840);
+                }
+            }
+            loadedImage.print(
+                HELVETICA_NEUE_53_EXTENDED_MODE,
+                X_STATS_KDR,
+                Y_STATS_PERFORMANCE,
+                {
+                    text: getCompareValue(
+                        data.newStats.kdRatio,
+                        data.oldStats ? data.oldStats.kdRatio : null,
+                        true
+                    ),
+                    alignmentX: Jimp.HORIZONTAL_ALIGN_LEFT,
+                    alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
+                },
+                MAX_WIDTH_STATS,
+                MAX_HEIGHT_STATS
+            );
+            //KILLPERGAME
+            if (data.oldStats) {
+                const dif = difNewOld(
+                    data.newStats.kills / data.newStats.gamesPlayed,
+                    data.oldStats.kills / data.oldStats.gamesPlayed
+                );
+
+                if (dif == -1) {
+                    loadedImage.blit(STATS_DOWN, 1455, 840);
+                } else if (dif == 1) {
+                    loadedImage.blit(STATS_UP, 1455, 840);
+                }
+            }
+            loadedImage.print(
+                HELVETICA_NEUE_53_EXTENDED_MODE,
+                X_STATS_KILLPERGAME,
+                Y_STATS_PERFORMANCE,
+                {
+                    text: getCompareValue(
+                        data.newStats.kills / data.newStats.gamesPlayed,
+                        data.oldStats
+                            ? data.oldStats.kills / data.oldStats.gamesPlayed
+                            : null,
+                        true
+                    ),
+                    alignmentX: Jimp.HORIZONTAL_ALIGN_LEFT,
+                    alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
+                },
+                MAX_WIDTH_STATS,
+                MAX_HEIGHT_STATS
+            );
             return;
         })
         .then(async () => {
