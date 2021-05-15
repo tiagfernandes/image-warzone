@@ -1,7 +1,8 @@
 {
     "pseudo": "Baldy",
     "oldStats": {
-        "wins": 9,
+        "dateInsert": "2021-05-11T21:39:26.303+00:00",
+        "wins": 1,
         "kills": 697,
         "deaths": 679,
         "kdRatio": 1.0365095729013254,
@@ -11,10 +12,10 @@
         "gamesPlayed": 242
     },
     "newStats": {
-        "wins": 10,
-        "kills": 800,
-        "deaths": 680,
-        "kdRatio": 1.010927835051546,
+        "wins": 50,
+        "kills": 999,
+        "deaths": 679,
+        "kdRatio": 1.040927835051546,
         "topTen": 62,
         "topFive": 32,
         "topTwentyFive": 200,

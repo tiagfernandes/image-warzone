@@ -1,5 +1,6 @@
 const Jimp = require("jimp");
 const moment = require("moment");
+const ta = require("time-ago");
 
 const imageSolo = __dirname + "/images/Solo.png";
 const imageDuo = __dirname + "/images/Duo.png";
@@ -51,21 +52,35 @@ const MAX_WIDTH_TRACK_STATS = 131;
 const MAX_HEIGHT_TRACK_LINE = 71;
 
 //STATS
+const MAX_HEIGHT_STATS = 35;
+const MAX_WIDTH_STATS = 250;
+
+//PSEUDO
 const X_STATS_PSEUDO = 858;
 const Y_STATS_PSEUDO = 150;
 const MAX_WIDTH_STATS_PSEUDO = 202;
 const MAX_HEIGHT_STATS_PSEUDO = 48;
+
+//COMPARETO
+const X_STATS_COMPAREDATE = 1365;
+const Y_STATS_COMPAREDATE = 110;
+const MAX_WIDTH_STATS_COMPAREDATE = 400;
+const MAX_HEIGHT_STATS_COMPAREDATE = 48;
 
 //CAREER
 const X_STATS_TIMEPLAYED = 920;
 const MAX_WIDTH_STATS_TIMEPLAYED = 380;
 const X_STATS_GAMESPLAYED = 1311;
 const X_STATS_WINPERCENTAGE = 1510;
+const X_STATS_WINPERCENTAGE_PICTO = 1480;
+const Y_STATS_WINPERCENTAGE_PICTO = 415;
 
 const Y_STATS_CAREER = 415;
 
 //WINS
 const X_STATS_TOTALWINS = 936;
+const X_STATS_TOTALWINS_PICTO = 905;
+const Y_STATS_TOTALWINS_PICTO = 640;
 const X_STATS_TOP5 = 1120;
 const X_STATS_TOP10 = 1310;
 const X_STATS_TOP25 = 1511;
@@ -76,12 +91,13 @@ const Y_STATS_WINS = 640;
 const X_STATS_KILLS = 932;
 const X_STATS_DEATHS = 1115;
 const X_STATS_KDR = 1307;
+const X_STATS_KDR_PICTO = 1275;
+const Y_STATS_KDR_PICTO = 860;
 const X_STATS_KILLPERGAME = 1510;
+const X_STATS_KILLPERGAME_PICTO = 1480;
+const Y_STATS_KILLPERGAME_PICTO = 860;
 
 const Y_STATS_PERFORMANCE = 860;
-
-const MAX_HEIGHT_STATS = 35;
-const MAX_WIDTH_STATS = 250;
 
 function secondsToDhm(seconds) {
     seconds = Number(seconds);
@@ -225,30 +241,30 @@ const generateImageMatch = (data) => {
                             index === 0
                                 ? Y_TRACK_FIRST_LINE_DUO
                                 : index === 1
-                                ? Y_TRACK_SECOND_LINE_DUO
-                                : Y_TRACK_FIRST_LINE_DUO;
+                                    ? Y_TRACK_SECOND_LINE_DUO
+                                    : Y_TRACK_FIRST_LINE_DUO;
                         break;
                     case 3:
                         y =
                             index === 0
                                 ? Y_TRACK_FIRST_LINE_TRIO
                                 : index === 1
-                                ? Y_TRACK_SECOND_LINE_TRIO
-                                : index === 2
-                                ? Y_TRACK_THIRD_LINE_TRIO
-                                : Y_TRACK_FIRST_LINE_TRIO;
+                                    ? Y_TRACK_SECOND_LINE_TRIO
+                                    : index === 2
+                                        ? Y_TRACK_THIRD_LINE_TRIO
+                                        : Y_TRACK_FIRST_LINE_TRIO;
                         break;
                     case 4:
                         y =
                             index === 0
                                 ? Y_TRACK_FIRST_LINE_QUATUOR
                                 : index === 1
-                                ? Y_TRACK_SECOND_LINE_QUATUOR
-                                : index === 2
-                                ? Y_THIRD_LINE_QUATUOR
-                                : index === 3
-                                ? Y_TRACK_FOURTH_LINE_QUATUOR
-                                : Y_TRACK_FIRST_LINE_QUATUOR;
+                                    ? Y_TRACK_SECOND_LINE_QUATUOR
+                                    : index === 2
+                                        ? Y_THIRD_LINE_QUATUOR
+                                        : index === 3
+                                            ? Y_TRACK_FOURTH_LINE_QUATUOR
+                                            : Y_TRACK_FIRST_LINE_QUATUOR;
                         break;
                 }
 
@@ -390,11 +406,11 @@ const getCompareValue = (
                 ? (value1 - value2).toFixed(2)
                 : (value1 - value2).toString()) + (withPourcentage ? "%" : "");
         if (value1 < value2) {
-            return a + " (" + b + ")";
+            return a + "(" + b + ")";
         } else if (value1 == value2) {
             return a;
         } else if (value1 > value2) {
-            return a + " (+" + b + ")";
+            return a + "(+" + b + ")";
         }
     }
 
@@ -422,7 +438,7 @@ const generateImageStats = (data) => {
             const HELVETICA_NEUE_LT_COM_76_BOLD_ITALIC_V2_STATS =
                 await Jimp.loadFont(
                     __dirname +
-                        "/fonts/HELVETICA_NEUE_LT_COM_76_BOLD_ITALIC_V2_STATS.fnt"
+                    "/fonts/HELVETICA_NEUE_LT_COM_76_BOLD_ITALIC_V2_STATS.fnt"
                 );
 
             const HELVETICA_NEUE_53_EXTENDED_MODE = await Jimp.loadFont(
@@ -446,7 +462,24 @@ const generateImageStats = (data) => {
                     MAX_WIDTH_STATS_PSEUDO,
                     MAX_HEIGHT_STATS_PSEUDO
                 )
-                //TIMEPLAYED
+            if (data.oldStats) {
+                //COMPARETO
+                loadedImage
+                    .print(
+                        HELVETICA_NEUE_53_EXTENDED_MODE,
+                        X_STATS_COMPAREDATE,
+                        Y_STATS_COMPAREDATE,
+                        {
+                            text: "Compare to : " + ta.ago(data.oldStats.dateInsert),
+                            alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
+                            alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
+                        },
+                        MAX_WIDTH_STATS_COMPAREDATE,
+                        MAX_HEIGHT_STATS_COMPAREDATE
+                    )
+            }
+            //TIMEPLAYED
+            loadedImage
                 .print(
                     HELVETICA_NEUE_53_EXTENDED_MODE,
                     X_STATS_TIMEPLAYED,
@@ -483,9 +516,9 @@ const generateImageStats = (data) => {
                 );
 
                 if (dif == -1) {
-                    loadedImage.blit(STATS_DOWN, 1455, 395);
+                    loadedImage.blit(STATS_DOWN, X_STATS_WINPERCENTAGE_PICTO, Y_STATS_WINPERCENTAGE_PICTO);
                 } else if (dif == 1) {
-                    loadedImage.blit(STATS_UP, 1455, 395);
+                    loadedImage.blit(STATS_UP, X_STATS_WINPERCENTAGE_PICTO, Y_STATS_WINPERCENTAGE_PICTO);
                 }
             }
             loadedImage.print(
@@ -497,7 +530,7 @@ const generateImageStats = (data) => {
                         (data.newStats.wins / data.newStats.gamesPlayed) * 100,
                         data.oldStats
                             ? (data.oldStats.wins / data.oldStats.gamesPlayed) *
-                                  100
+                            100
                             : null,
                         true,
                         true
@@ -513,7 +546,7 @@ const generateImageStats = (data) => {
                 const dif = difNewOld(data.newStats.wins, data.oldStats.wins);
 
                 if (dif == 1) {
-                    loadedImage.blit(STATS_UP, 880, 620);
+                    loadedImage.blit(STATS_UP, X_STATS_TOTALWINS_PICTO, Y_STATS_TOTALWINS_PICTO);
                 }
             }
             //TOTALWINS
@@ -621,9 +654,9 @@ const generateImageStats = (data) => {
                 );
 
                 if (dif == -1) {
-                    loadedImage.blit(STATS_DOWN, 1250, 840);
+                    loadedImage.blit(STATS_DOWN, X_STATS_KDR_PICTO, Y_STATS_KDR_PICTO);
                 } else if (dif == 1) {
-                    loadedImage.blit(STATS_UP, 1250, 840);
+                    loadedImage.blit(STATS_UP, X_STATS_KDR_PICTO, Y_STATS_KDR_PICTO);
                 }
             }
             loadedImage.print(
@@ -650,9 +683,9 @@ const generateImageStats = (data) => {
                 );
 
                 if (dif == -1) {
-                    loadedImage.blit(STATS_DOWN, 1455, 840);
+                    loadedImage.blit(STATS_DOWN, X_STATS_KILLPERGAME_PICTO, Y_STATS_KILLPERGAME_PICTO);
                 } else if (dif == 1) {
-                    loadedImage.blit(STATS_UP, 1455, 840);
+                    loadedImage.blit(STATS_UP, X_STATS_KILLPERGAME_PICTO, Y_STATS_KILLPERGAME_PICTO);
                 }
             }
             loadedImage.print(

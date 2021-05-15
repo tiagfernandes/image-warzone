@@ -1,7 +1,8 @@
 {
   "dependencies": {
     "jimp": "^0.16.1",
-    "moment": "^2.29.1"
+    "moment": "^2.29.1",
+    "time-ago": "^0.2.1"
   },
   "name": "image-warzone",
   "description": "Generate image for warzone bot",
