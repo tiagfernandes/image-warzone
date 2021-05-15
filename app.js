@@ -445,9 +445,9 @@ const generateImageStats = (data) => {
                 __dirname + "/fonts/HELVETICA_NEUE_53_EXTENDED_MODE.fnt"
             );
 
-            const STATS_UP = await Jimp.read(__dirname + "images/Stats_up.png");
+            const STATS_UP = await Jimp.read(__dirname + "/images/Stats_up.png");
             const STATS_DOWN = await Jimp.read(
-                __dirname + "images/Stats_down.png"
+                __dirname + "/images/Stats_down.png"
             );
 
             loadedImage
