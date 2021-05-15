@@ -241,30 +241,30 @@ const generateImageMatch = (data) => {
                             index === 0
                                 ? Y_TRACK_FIRST_LINE_DUO
                                 : index === 1
-                                    ? Y_TRACK_SECOND_LINE_DUO
-                                    : Y_TRACK_FIRST_LINE_DUO;
+                                ? Y_TRACK_SECOND_LINE_DUO
+                                : Y_TRACK_FIRST_LINE_DUO;
                         break;
                     case 3:
                         y =
                             index === 0
                                 ? Y_TRACK_FIRST_LINE_TRIO
                                 : index === 1
-                                    ? Y_TRACK_SECOND_LINE_TRIO
-                                    : index === 2
-                                        ? Y_TRACK_THIRD_LINE_TRIO
-                                        : Y_TRACK_FIRST_LINE_TRIO;
+                                ? Y_TRACK_SECOND_LINE_TRIO
+                                : index === 2
+                                ? Y_TRACK_THIRD_LINE_TRIO
+                                : Y_TRACK_FIRST_LINE_TRIO;
                         break;
                     case 4:
                         y =
                             index === 0
                                 ? Y_TRACK_FIRST_LINE_QUATUOR
                                 : index === 1
-                                    ? Y_TRACK_SECOND_LINE_QUATUOR
-                                    : index === 2
-                                        ? Y_THIRD_LINE_QUATUOR
-                                        : index === 3
-                                            ? Y_TRACK_FOURTH_LINE_QUATUOR
-                                            : Y_TRACK_FIRST_LINE_QUATUOR;
+                                ? Y_TRACK_SECOND_LINE_QUATUOR
+                                : index === 2
+                                ? Y_THIRD_LINE_QUATUOR
+                                : index === 3
+                                ? Y_TRACK_FOURTH_LINE_QUATUOR
+                                : Y_TRACK_FIRST_LINE_QUATUOR;
                         break;
                 }
 
@@ -438,15 +438,17 @@ const generateImageStats = (data) => {
             const HELVETICA_NEUE_LT_COM_76_BOLD_ITALIC_V2_STATS =
                 await Jimp.loadFont(
                     __dirname +
-                    "/fonts/HELVETICA_NEUE_LT_COM_76_BOLD_ITALIC_V2_STATS.fnt"
+                        "/fonts/HELVETICA_NEUE_LT_COM_76_BOLD_ITALIC_V2_STATS.fnt"
                 );
 
             const HELVETICA_NEUE_53_EXTENDED_MODE = await Jimp.loadFont(
                 __dirname + "/fonts/HELVETICA_NEUE_53_EXTENDED_MODE.fnt"
             );
 
-            const STATS_UP = await Jimp.read("images/Stats_up.png");
-            const STATS_DOWN = await Jimp.read("images/Stats_down.png");
+            const STATS_UP = await Jimp.read(__dirname + "images/Stats_up.png");
+            const STATS_DOWN = await Jimp.read(
+                __dirname + "images/Stats_down.png"
+            );
 
             loadedImage
                 //PSEUDO
@@ -461,22 +463,22 @@ const generateImageStats = (data) => {
                     },
                     MAX_WIDTH_STATS_PSEUDO,
                     MAX_HEIGHT_STATS_PSEUDO
-                )
+                );
             if (data.oldStats) {
                 //COMPARETO
-                loadedImage
-                    .print(
-                        HELVETICA_NEUE_53_EXTENDED_MODE,
-                        X_STATS_COMPAREDATE,
-                        Y_STATS_COMPAREDATE,
-                        {
-                            text: "Compare to : " + ta.ago(data.oldStats.dateInsert),
-                            alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
-                            alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
-                        },
-                        MAX_WIDTH_STATS_COMPAREDATE,
-                        MAX_HEIGHT_STATS_COMPAREDATE
-                    )
+                loadedImage.print(
+                    HELVETICA_NEUE_53_EXTENDED_MODE,
+                    X_STATS_COMPAREDATE,
+                    Y_STATS_COMPAREDATE,
+                    {
+                        text:
+                            "Compare to : " + ta.ago(data.oldStats.dateInsert),
+                        alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
+                        alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
+                    },
+                    MAX_WIDTH_STATS_COMPAREDATE,
+                    MAX_HEIGHT_STATS_COMPAREDATE
+                );
             }
             //TIMEPLAYED
             loadedImage
@@ -516,9 +518,17 @@ const generateImageStats = (data) => {
                 );
 
                 if (dif == -1) {
-                    loadedImage.blit(STATS_DOWN, X_STATS_WINPERCENTAGE_PICTO, Y_STATS_WINPERCENTAGE_PICTO);
+                    loadedImage.blit(
+                        STATS_DOWN,
+                        X_STATS_WINPERCENTAGE_PICTO,
+                        Y_STATS_WINPERCENTAGE_PICTO
+                    );
                 } else if (dif == 1) {
-                    loadedImage.blit(STATS_UP, X_STATS_WINPERCENTAGE_PICTO, Y_STATS_WINPERCENTAGE_PICTO);
+                    loadedImage.blit(
+                        STATS_UP,
+                        X_STATS_WINPERCENTAGE_PICTO,
+                        Y_STATS_WINPERCENTAGE_PICTO
+                    );
                 }
             }
             loadedImage.print(
@@ -530,7 +540,7 @@ const generateImageStats = (data) => {
                         (data.newStats.wins / data.newStats.gamesPlayed) * 100,
                         data.oldStats
                             ? (data.oldStats.wins / data.oldStats.gamesPlayed) *
-                            100
+                                  100
                             : null,
                         true,
                         true
@@ -546,7 +556,11 @@ const generateImageStats = (data) => {
                 const dif = difNewOld(data.newStats.wins, data.oldStats.wins);
 
                 if (dif == 1) {
-                    loadedImage.blit(STATS_UP, X_STATS_TOTALWINS_PICTO, Y_STATS_TOTALWINS_PICTO);
+                    loadedImage.blit(
+                        STATS_UP,
+                        X_STATS_TOTALWINS_PICTO,
+                        Y_STATS_TOTALWINS_PICTO
+                    );
                 }
             }
             //TOTALWINS
@@ -654,9 +668,17 @@ const generateImageStats = (data) => {
                 );
 
                 if (dif == -1) {
-                    loadedImage.blit(STATS_DOWN, X_STATS_KDR_PICTO, Y_STATS_KDR_PICTO);
+                    loadedImage.blit(
+                        STATS_DOWN,
+                        X_STATS_KDR_PICTO,
+                        Y_STATS_KDR_PICTO
+                    );
                 } else if (dif == 1) {
-                    loadedImage.blit(STATS_UP, X_STATS_KDR_PICTO, Y_STATS_KDR_PICTO);
+                    loadedImage.blit(
+                        STATS_UP,
+                        X_STATS_KDR_PICTO,
+                        Y_STATS_KDR_PICTO
+                    );
                 }
             }
             loadedImage.print(
@@ -683,9 +705,17 @@ const generateImageStats = (data) => {
                 );
 
                 if (dif == -1) {
-                    loadedImage.blit(STATS_DOWN, X_STATS_KILLPERGAME_PICTO, Y_STATS_KILLPERGAME_PICTO);
+                    loadedImage.blit(
+                        STATS_DOWN,
+                        X_STATS_KILLPERGAME_PICTO,
+                        Y_STATS_KILLPERGAME_PICTO
+                    );
                 } else if (dif == 1) {
-                    loadedImage.blit(STATS_UP, X_STATS_KILLPERGAME_PICTO, Y_STATS_KILLPERGAME_PICTO);
+                    loadedImage.blit(
+                        STATS_UP,
+                        X_STATS_KILLPERGAME_PICTO,
+                        Y_STATS_KILLPERGAME_PICTO
+                    );
                 }
             }
             loadedImage.print(
