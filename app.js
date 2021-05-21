@@ -99,18 +99,16 @@ const Y_STATS_KILLPERGAME_PICTO = 860;
 
 const Y_STATS_PERFORMANCE = 860;
 
-function secondsToDhm(seconds) {
+function secondsToHrs(seconds) {
     seconds = Number(seconds);
 
-    var d = Math.floor(seconds / (3600 * 24));
-    var h = Math.floor((seconds % (3600 * 24)) / 3600);
-    var m = Math.floor((seconds % 3600) / 60);
+    var hours = Math.floor(seconds / 3600);
+    var minutes = Math.floor((seconds % 3600) / 60);
 
-    var dDisplay = d > 0 ? d + (d == 1 ? " day, " : " days, ") : "";
-    var hDisplay = h > 0 ? h + (h == 1 ? " hour, " : " hours, ") : "";
-    var mDisplay = m > 0 ? m + (m == 1 ? " min, " : " mins") : "";
+    var hoursDisplay = hours > 0 ? hours + (hours == 1 ? " hour, " : " hours, ") : "";
+    var minutesDisplay = minutes > 0 ? minutes + (minutes == 1 ? " min, " : " mins") : "";
 
-    return dDisplay + hDisplay + mDisplay;
+    return hoursDisplay + minutesDisplay;
 }
 
 function unixTime(unixtime) {
@@ -487,7 +485,7 @@ const generateImageStats = (data) => {
                     X_STATS_TIMEPLAYED,
                     Y_STATS_CAREER,
                     {
-                        text: secondsToDhm(data.newStats.timePlayed),
+                        text: secondsToHrs(data.newStats.timePlayed),
                         alignmentX: Jimp.HORIZONTAL_ALIGN_LEFT,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE,
                     },
