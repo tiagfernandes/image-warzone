@@ -1,3 +1,6 @@
 /node_modules
-/test/test.png
-yarn.lock
+/test/stats.png
+/test/track.png
+
+.DS_Store
+fonts/.DS_Store

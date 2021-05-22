@@ -1,0 +1,25 @@
+{
+    "pseudo": "BrickLayeR",
+    "oldStats": {
+        "dateInsert": "2021-05-11T21:39:26.303+00:00",
+        "wins": 1,
+        "kills": 697,
+        "deaths": 679,
+        "kdRatio": 1.0365095729013254,
+        "topTen": 61,
+        "topFive": 31,
+        "topTwentyFive": 199,
+        "gamesPlayed": 242
+    },
+    "newStats": {
+        "wins": 50,
+        "kills": 999,
+        "deaths": 679,
+        "kdRatio": 1.040927835051546,
+        "topTen": 62,
+        "topFive": 32,
+        "topTwentyFive": 200,
+        "gamesPlayed": 245,
+        "timePlayed": 249973
+    }
+}

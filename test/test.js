@@ -1,9 +1,6 @@
-const generateImageMatch = require('../app');
-const d = require('./js.json')
-const fs = require('fs')
+const { execSync } = require("child_process");
 
-generateImageMatch(d).then(imageBase64 => {
-    console.log(imageBase64);
-    var imageBuffer = Buffer.from(imageBase64, 'base64'); 
-    fs.writeFile("test/test.png", imageBuffer, (err) => console.log(err));
-})
+execSync("node test/stats.js");
+execSync("node test/track.js");
+
+console.log('DONE')
